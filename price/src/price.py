@@ -25,4 +25,7 @@ class Price:
 
     def get_product_price(self, product_id):
 
-        return 2.50
+        def closure(product):
+            return product['product_id'] == product_id
+
+        return list(filter(closure, self.price_list))[0]['price']

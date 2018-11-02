@@ -11,12 +11,18 @@ class Price:
 
     def get_product_prices(self):
 
+        price = self.get_product_price(1)
+
         return [{
-            "price": 2.50,
+            "price": price,
             "currency": self.exchange_rate['currency'],
-            "price_currency": self.exchange_rate['currency'] + '{:.2f}'.format(2.50),
+            "price_currency": self.exchange_rate['currency'] + '{:.2f}'.format(price),
             "vat": self.vat,
-            "vat_amount": (2.50 / 100) * self.vat,
-            "total_price": 2.50 + ((2.50 / 100) * self.vat),
-            "total_price_currency": self.exchange_rate['currency'] + '{:.2f}'.format(2.50 + ((2.50 / 100) * self.vat)),
+            "vat_amount": (price / 100) * self.vat,
+            "total_price": price + ((price / 100) * self.vat),
+            "total_price_currency": self.exchange_rate['currency'] + '{:.2f}'.format(price + ((price / 100) * self.vat)),
         }]
+
+    def get_product_price(self, product_id):
+
+        return 2.50

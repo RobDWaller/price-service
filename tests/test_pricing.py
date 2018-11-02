@@ -27,3 +27,14 @@ class TestPrice(unittest.TestCase):
         self.assertEqual(0.50, result[0]["vat_amount"])
         self.assertEqual(3.00, result[0]["total_price"])
         self.assertEqual('£3.00', result[0]["total_price_currency"])
+
+    def test_get_product_price(self):
+
+       products = [{'product_id': 1}]
+       price_list = [{'product_id': 1, 'price': 2.50}]
+       vat = 20
+       exchange_rate = {'rate': 1, 'currency': '£'}
+
+       price = Price(products, price_list, vat, exchange_rate)
+
+       self.assertEqual(2.50, price.get_product_price(1))

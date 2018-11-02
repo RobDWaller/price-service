@@ -5,6 +5,6 @@ class TestPrice(unittest.TestCase):
 
     def test_price(self):
 
-        price = Price();
+        price = Price([], [], 20, 0);
 
         self.assertIsInstance(price, Price)

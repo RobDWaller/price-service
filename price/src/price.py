@@ -11,17 +11,21 @@ class Price:
 
     def get_product_prices(self):
 
-        price = self.get_product_price(1)
+        def closure(product):
 
-        return [{
-            "price": price,
-            "currency": self.exchange_rate['currency'],
-            "price_currency": self.exchange_rate['currency'] + '{:.2f}'.format(price),
-            "vat": self.vat,
-            "vat_amount": (price / 100) * self.vat,
-            "total_price": price + ((price / 100) * self.vat),
-            "total_price_currency": self.exchange_rate['currency'] + '{:.2f}'.format(price + ((price / 100) * self.vat)),
-        }]
+            price = self.get_product_price(product['product_id'])
+
+            return {
+                "price": price,
+                "currency": self.exchange_rate['currency'],
+                "price_currency": self.exchange_rate['currency'] + '{:.2f}'.format(price),
+                "vat": self.vat,
+                "vat_amount": round((price / 100) * self.vat, 2),
+                "total_price": price + ((price / 100) * self.vat),
+                "total_price_currency": self.exchange_rate['currency'] + '{:.2f}'.format(price + ((price / 100) * self.vat)),
+            }
+
+        return list(map(closure, self.products))
 
     def get_product_price(self, product_id):
 

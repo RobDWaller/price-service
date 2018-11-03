@@ -32,7 +32,9 @@ class Price:
         def closure(product):
             return product['product_id'] == product_id
 
-        return list(filter(closure, self.price_list))[0]['price']
+        price = list(filter(closure, self.price_list))[0]['price']
+
+        return round(price * self.exchange_rate['rate'], 2)
 
     def get_total_price(self):
 

@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import jsonify
 import json
 from price.src.controller import Controller
 
@@ -13,4 +14,4 @@ def hello_world():
 def prices_read():
     result = Controller.read(json.loads(request.form['data']))
 
-    return json.dumps(result)
+    return jsonify(result)

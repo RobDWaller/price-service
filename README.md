@@ -146,6 +146,7 @@ Flaws:
 - The library generally returns lists of dictionaries. This is not ideal a 'collection' of objects would be preferable.
 - The representation of the different currencies could be better, using symbols isn't ideal.
 - There is no integration with a database to acquire price data.
+- Code coverage could be a lot better and further tests added.
 
 ## Author
 

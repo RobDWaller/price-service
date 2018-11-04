@@ -1,15 +1,32 @@
+'''
+Price module calculates the values of the individual products and the total
+value of all the products.
+'''
 from functools import reduce
 
 class Price:
+    '''
+    Price class includes two main methods, get product prices returns the
+    value of each individual product and get total price returns the value
+    of all the products.
+    '''
 
     def __init__(self, products, price_list, vat, exchange_rate):
+        '''
+        Constructor consumes a list of products, the price list, the VAT rate
+        and the exchange rate dict.
+        '''
 
-       self.products = products
-       self.price_list = price_list
-       self.vat = vat
-       self.exchange_rate = exchange_rate
+        self.products = products
+        self.price_list = price_list
+        self.vat = vat
+        self.exchange_rate = exchange_rate
 
     def get_product_prices(self):
+        '''
+        Return the value of each individual product. Maps the product data to
+        calculate base cost of product along with the product plus VAT
+        '''
 
         def closure(product):
 
@@ -28,6 +45,9 @@ class Price:
         return list(map(closure, self.products))
 
     def get_product_price(self, product_id):
+        '''
+        Find the product price from the price list based on the product id
+        '''
 
         def closure(product):
             return product['product_id'] == product_id
@@ -37,6 +57,10 @@ class Price:
         return round(price * self.exchange_rate['rate'], 2)
 
     def get_total_price(self):
+        '''
+        Reduces all the product value data into a single dict which represents
+        the total value of all the products added together.
+        '''
 
         prices = self.get_product_prices()
 

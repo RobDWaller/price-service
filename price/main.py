@@ -1,15 +1,15 @@
 '''
 Main routes module for price service application
 '''
+import json
 from flask import Flask
 from flask import request
 from flask import jsonify
-import json
 from price.src.controller import Controller
 
-app = Flask(__name__)
+APP = Flask(__name__)
 
-@app.route('/prices', methods=['POST'])
+@APP.route('/prices', methods=['POST'])
 def prices_read():
     '''
     Prices endpoint, consumes json data representing a list of products and
@@ -19,7 +19,7 @@ def prices_read():
 
     return jsonify(result)
 
-@app.route('/')
+@APP.route('/')
 def documentation():
     '''
     Base application endpoint, explains how to use service and confirm flask

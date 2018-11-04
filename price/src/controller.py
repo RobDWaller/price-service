@@ -2,10 +2,11 @@
 Controller module consumes the json product and quantity data and returns
 the price information for the products defined.
 '''
-from price.src.price_list import price_list
+from price.src.price_list import PRICE_LIST
 from price.src.product import Product
 from price.src.price import Price
 
+# pylint: disable=too-few-public-methods
 class Controller:
     '''
     Controller class includes single static read method to return
@@ -24,7 +25,7 @@ class Controller:
 
         price = Price(
             product.get_products(),
-            price_list,
+            PRICE_LIST,
             20,
             {'rate': 1, 'currency': '£'}
         )

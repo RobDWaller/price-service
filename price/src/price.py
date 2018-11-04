@@ -39,22 +39,12 @@ class Price:
                 "vat": self.vat,
                 "vat_amount": round((price / 100) * self.vat, 2),
                 "total_price": price + ((price / 100) * self.vat),
-                "total_price_currency": self.exchange_rate['currency'] + '{:.2f}'.format(price + ((price / 100) * self.vat)),
+                "total_price_currency": self.exchange_rate['currency'] + '{:.2f}'.format(
+                    price + ((price / 100) * self.vat)
+                )
             }
 
         return list(map(closure, self.products))
-
-    def get_product_price(self, product_id):
-        '''
-        Find the product price from the price list based on the product id
-        '''
-
-        def closure(product):
-            return product['product_id'] == product_id
-
-        price = list(filter(closure, self.price_list))[0]['price']
-
-        return round(price * self.exchange_rate['rate'], 2)
 
     def get_total_price(self):
         '''
@@ -73,10 +63,28 @@ class Price:
         def closure(carry, price):
 
             carry['total_price'] = carry['total_price'] + price['price']
-            carry['total_price_currency'] = price['currency'] + '{:.2f}'.format(carry['total_price'])
-            carry['total_price_vat'] = round(carry['total_price_vat'] + price['total_price'], 2)
-            carry['total_price_vat_currency'] = price['currency'] + '{:.2f}'.format(carry['total_price_vat'])
+            carry['total_price_currency'] = price['currency'] + '{:.2f}'.format(
+                carry['total_price']
+            )
+            carry['total_price_vat'] = round(
+                carry['total_price_vat'] + price['total_price'], 2
+            )
+            carry['total_price_vat_currency'] = price['currency'] + '{:.2f}'.format(
+                carry['total_price_vat']
+            )
 
             return carry
 
         return reduce(closure, prices, carry)
+
+    def get_product_price(self, product_id):
+        '''
+        Find the product price from the price list based on the product id
+        '''
+
+        def closure(product):
+            return product['product_id'] == product_id
+
+        price = list(filter(closure, self.price_list))[0]['price']
+
+        return round(price * self.exchange_rate['rate'], 2)

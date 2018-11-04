@@ -4,6 +4,7 @@ json object into individual product dicts.
 '''
 from functools import reduce
 
+# pylint: disable=too-few-public-methods
 class Product:
     '''
     Product class contains single end point get products
@@ -16,6 +17,7 @@ class Product:
 
         self.products = products
 
+    # pylint: disable=unused-variable
     def get_products(self):
         '''
         Transforms the products and quantity data into a list of individual

@@ -1,0 +1,19 @@
+dist: xenial
+
+language: python
+
+python:
+    - "3.5"
+    - "3.6"
+
+install:
+    - pip install -r requirements.txt
+
+script:
+    - python -m unittest discover tests/
+    - python -m radon cc price
+    - python -m pylint price
+    - coverage run --source price/ -m unittest discover tests/
+
+after_success:
+    - codecov

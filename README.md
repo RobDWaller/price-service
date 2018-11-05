@@ -142,11 +142,11 @@ The flaws are listed below and are generally based on time constraints.
 Flaws:
 
 - No attempt is made to integrate with a third party exchange rate API / provider. The code and unit tests show the core business logic can cope with different exchange rates though.
-- No validation of the input JSON input data is carried. It assumes input will always be correct.
+- No validation of the JSON input data is carried out. It assumes input will always be correct.
 - The library generally returns lists of dictionaries. This is not ideal a 'collection' of objects would be preferable.
 - The representation of the different currencies could be better, using symbols isn't ideal.
 - There is no integration with a database to acquire price data.
-- Code coverage could be a lot better and further tests added.
+- Code coverage could be better and further tests added.
 
 ## Author
 
